@@ -1,0 +1,12 @@
+.todos {
+    border-radius: 15px;
+    background: #004b49;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color: #d470a2;
+}
+
+.todos h1 {
+    font-size: 2.5rem;
+}
