@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Todo.scss';
+import "./todo.scss";
 import TodoForm from './TodoForm';
 import Todo from './Todo';
 

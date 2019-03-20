@@ -1,6 +1,11 @@
 import React from 'react';
-import styles from './index.scss';
+import './index.scss';
 import TodoList from './components/TodoComponents/TodoList';
+
+const localStorage = window.localStorage,
+  todoListParsed = Object.values(localStorage).map(par => JSON.parse(par));
+
+console.log(todoListParsed)
 
 class App extends React.Component {
   // you will need a place to store your state in this component.
@@ -9,7 +14,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      toDoList: [],
+      toDoList: todoListParsed,
       todo: '',
       id: 0,
       completed: false
@@ -29,6 +34,8 @@ class App extends React.Component {
       id: Date.now(),
       completed: false
     }
+
+    localStorage.setItem(newTodo.id, JSON.stringify(newTodo));
 
     this.setState({
       toDoList: [...this.state.toDoList, newTodo],
