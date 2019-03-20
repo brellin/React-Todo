@@ -7,8 +7,23 @@
     align-items: center;
     justify-content: center;
     color: #d470a2;
+    padding: 0 0 25px;
 }
 
 .todos h1 {
     font-size: 2.5rem;
+    color: #d1237a;
+    margin-bottom: 0px;
+}
+
+.todos ul li {
+    list-style-type: circle;
+    list-style-position: outside;
+}
+
+.todos form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

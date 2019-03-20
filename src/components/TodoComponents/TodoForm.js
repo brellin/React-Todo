@@ -4,8 +4,13 @@ const TodoForm = props => {
     return (
         <form>
             <input
-                todo={props.eventHandler}
+                onChange={props.eventHandler}
+                name='todo'
+                placeholder='Your todo'
+                value={props.todo}
             />
+            <button onClick={props.updateList}>Add Todo</button>
+            <button>Clear Completed</button>
         </form>
     );
 }

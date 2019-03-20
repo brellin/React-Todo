@@ -1,6 +1,6 @@
 import React from 'react';
-import Todo from './components/TodoComponents/Todo';
 import './index.css';
+import TodoList from './components/TodoComponents/TodoList';
 
 class App extends React.Component {
   // you will need a place to store your state in this component.
@@ -9,13 +9,42 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      todo: ''
+      toDoList: [],
+      todo: '',
+      id: 0,
+      completed: false
     }
   }
+
+  eventHandler = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
+  updateList = e => {
+    e.preventDefault();
+    const newTodo = {
+      todo: this.state.todo,
+      id: Date.now(),
+      completed: false
+    }
+
+    this.setState({
+      toDoList: [...this.state.toDoList, newTodo],
+      value: ''
+    });
+  }
+
   render() {
     return (
       <div className='container'>
-        <Todo />
+        <TodoList
+          name={this.state.todo}
+          list={this.state.toDoList}
+          updateList={this.updateList}
+          eventHandler={this.eventHandler}
+        />
       </div>
     );
   }
