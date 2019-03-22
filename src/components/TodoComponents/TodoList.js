@@ -4,16 +4,18 @@ import TodoForm from './TodoForm';
 import Todo from './Todo';
 
 const TodoList = props => {
+    console.log('TodoList: ', props)
     return (
         <div className='todos'>
-            <h1>Todo List:</h1>
+            <h1>Todo List</h1>
             <ul>
-                {props.list.map((arr, index) => <Todo key={index} todo={arr.todo} />)}
+                {props.list.map((todo, index) => <Todo key={index} todo={todo} completer={props.completer} />)}
             </ul>
             <TodoForm
-                name={props.todo}
+                todo={props.todo}
                 updateList={props.updateList}
                 eventHandler={props.eventHandler}
+                clearCompleted={props.clearCompleted}
             />
         </div>
     );

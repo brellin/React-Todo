@@ -2,11 +2,6 @@ import React from 'react';
 import './index.scss';
 import TodoList from './components/TodoComponents/TodoList';
 
-const localStorage = window.localStorage,
-  todoListParsed = Object.values(localStorage).map(par => JSON.parse(par));
-
-console.log(todoListParsed)
-
 class App extends React.Component {
   // you will need a place to store your state in this component.
   // design `App` to be the parent component of your application.
@@ -14,43 +9,73 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      toDoList: todoListParsed,
-      todo: '',
-      id: 0,
-      completed: false
+      toDoList: [{
+        name: 'Null',
+        id: 0,
+        completed: true
+      },
+      {
+        name: 'Undefined',
+        id: 1,
+        completed: true
+      }],
+      todo: {
+        name: '',
+        id: 0,
+        completed: false
+      }
     }
   }
 
   eventHandler = e => {
     this.setState({
-      [e.target.name]: e.target.value
+      todo: e.target.value
     });
   };
 
   updateList = e => {
     e.preventDefault();
     const newTodo = {
-      todo: this.state.todo,
+      name: this.state.todo,
       id: Date.now(),
       completed: false
     }
 
-    localStorage.setItem(newTodo.id, JSON.stringify(newTodo));
-
     this.setState({
-      toDoList: [...this.state.toDoList, newTodo],
-      value: ''
+      toDoList: [...this.state.toDoList, newTodo]
     });
+  }
+
+  completer = e => {
+    this.setState({
+      toDoList: this.state.toDoList.map(todo => {
+        if (todo.id === e.id) {
+          return {
+            ...e,
+            completed: !todo.completed
+          }
+        }
+        return todo;
+      })
+    });
+  }
+
+  clearCompleted = e => {
+    e.preventDefault();
+    const filteredList = this.state.toDoList.filter(todo => todo.completed === false);
+    this.setState({ toDoList: filteredList });
   }
 
   render() {
     return (
       <div className='container'>
         <TodoList
-          name={this.state.todo}
+          todo={this.state.todo}
           list={this.state.toDoList}
           updateList={this.updateList}
           eventHandler={this.eventHandler}
+          completer={this.completer}
+          clearCompleted={this.clearCompleted}
         />
       </div>
     );
