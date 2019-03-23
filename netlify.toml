@@ -1,9 +1,0 @@
-[Settings]
-ID = "3b3a1efe-f716-4f64-b298-8e4b1f940350"
-
-# Settings in the [build] context are global and are applied to all contexts unless otherwise overridden by more specific contexts.  
-
-[build]
-  publish = "build/"
-  # This will be your default build command
-  command = "yarn build"
