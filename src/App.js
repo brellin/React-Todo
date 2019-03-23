@@ -42,7 +42,12 @@ class App extends React.Component {
     }
 
     this.setState({
-      toDoList: [...this.state.toDoList, newTodo]
+      toDoList: [...this.state.toDoList, newTodo],
+      todo: {
+        name: '',
+        id: Date.now(),
+        completed: false
+      }
     });
   }
 
